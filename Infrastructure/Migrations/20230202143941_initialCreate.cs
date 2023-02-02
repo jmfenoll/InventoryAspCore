@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Inventory.Infrastructure.Migrations
+namespace Inventory.EFSqlRepository.Migrations
 {
     /// <inheritdoc />
     public partial class initialCreate : Migration

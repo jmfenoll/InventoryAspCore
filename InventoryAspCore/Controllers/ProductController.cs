@@ -1,8 +1,5 @@
-﻿using Infrastructure.Interfaces;
-using Inventory.Infrastructure.Models;
-using Inventory.Mvc.Services;
+﻿using Inventory.Mvc.Services;
 using InventoryAspCore.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryAspMvc.Controllers
@@ -43,7 +40,7 @@ namespace InventoryAspMvc.Controllers
             try
             {
                 _productService.ValidateCreating(viewModel, ModelState);
-                
+
                 if (ModelState.IsValid)
                 {
                     viewModel = _productService.Insert(viewModel);

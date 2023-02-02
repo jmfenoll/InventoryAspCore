@@ -1,9 +1,8 @@
-using Infrastructure.Interfaces;
-using Inventory.Infrastructure.Dapper;
+using Inventory.Infrastructure.EFSqlRepository.Context;
 using Inventory.Infrastructure.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Diagnostics;
+using Inventory.Infrastructure.Models.Interfaces;
 using Inventory.Mvc.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +48,6 @@ app.Run();
 
 void ConfigureServices(IServiceCollection services)
 {
-    services.AddTransient<IRepository<Product>, ProductRepositorySql>();
+    services.AddTransient<IRepository<Product>, ProductRepository>();
     services.AddTransient<ProductService, ProductService>();
 }

@@ -1,12 +1,7 @@
-﻿using Infrastructure.Interfaces;
-using Inventory.Infrastructure.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Inventory.Infrastructure.Models;
+using Inventory.Infrastructure.Models.Interfaces;
 
-namespace Inventory.Infrastructure.Dapper
+namespace Inventory.Infrastructure.DapperRepository
 {
     public class ProductRepositoryDapper : IRepository<Product>
     {

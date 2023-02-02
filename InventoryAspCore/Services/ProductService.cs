@@ -1,5 +1,5 @@
-﻿using Infrastructure.Interfaces;
-using Inventory.Infrastructure.Models;
+﻿using Inventory.Infrastructure.Models;
+using Inventory.Infrastructure.Models.Interfaces;
 using InventoryAspCore.Models;
 
 namespace Inventory.Mvc.Services
@@ -14,7 +14,7 @@ namespace Inventory.Mvc.Services
         }
         internal List<ProductViewModel> GetAll()
         {
-            var models= _repository.GetAll();
+            var models = _repository.GetAll();
             var viewModels = Mapper(models);
             return viewModels.ToList();
         }
@@ -41,7 +41,7 @@ namespace Inventory.Mvc.Services
 
         private IEnumerable<ProductViewModel> Mapper(IEnumerable<Product> models)
         {
-            var result= new List<ProductViewModel>();
+            var result = new List<ProductViewModel>();
 
             foreach (var p in models)
             {

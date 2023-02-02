@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Inventory.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Inventory.Infrastructure.Models;
+namespace Inventory.Infrastructure.EFSqlRepository.Context;
 
 public partial class InventoryDbContext : DbContext
 {
@@ -27,14 +28,5 @@ public partial class InventoryDbContext : DbContext
 
     }
 
-
-    /*
-    public IConfiguration? _configuration { get; }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(_configuration.GetConnectionString("InventoryDatabase"));
-
-
-    */
     public virtual DbSet<Product> Products { get; set; }
 }

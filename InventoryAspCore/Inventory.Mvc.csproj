@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Inventory.Infrastructure.csproj" />
+    <ProjectReference Include="..\Infrastructure\Inventory.Infrastructure.EFSqlRepository.csproj" />
   </ItemGroup>
 
 </Project>
