@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventory.Infrastructure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Interfaces
 {
-    public interface IProductRepository
+    public interface IRepository<T>
     {
+        IEnumerable<T> GetAll();
+        T Insert(T model);
     }
 }

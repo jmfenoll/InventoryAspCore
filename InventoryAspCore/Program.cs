@@ -1,10 +1,24 @@
 using Infrastructure.Interfaces;
 using Inventory.Infrastructure.Dapper;
+using Inventory.Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics;
+using Inventory.Mvc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration;
+
+builder.Services.AddDbContext<InventoryDbContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("InventoryDatabase")));
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 
 ConfigureServices(builder.Services);
 
@@ -35,5 +49,6 @@ app.Run();
 
 void ConfigureServices(IServiceCollection services)
 {
-    services.AddTransient<IProductRepository, ProductRepositoryDapper>();
+    services.AddTransient<IRepository<Product>, ProductRepositorySql>();
+    services.AddTransient<ProductService, ProductService>();
 }

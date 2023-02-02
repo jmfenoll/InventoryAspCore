@@ -1,4 +1,6 @@
 ﻿using Infrastructure.Interfaces;
+using Inventory.Infrastructure.Models;
+using Inventory.Mvc.Services;
 using InventoryAspCore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,19 +9,18 @@ namespace InventoryAspMvc.Controllers
 {
     public class ProductController : Controller
     {
-        private IProductRepository _productRepository;
+        private ProductService _productService;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(ProductService productService)
         {
-            _productRepository = productRepository;
+            _productService = productService;
         }
 
         // GET: ProductController
         public ActionResult Index()
         {
-            var model = new List<ProductViewModel>();
-
-            return View(model);
+            var viewModel = _productService.GetAll();
+            return View(viewModel);
         }
 
         // GET: ProductController/Details/5
@@ -37,15 +38,26 @@ namespace InventoryAspMvc.Controllers
         // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(ProductViewModel viewModel)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _productService.ValidateCreating(viewModel, ModelState);
+                
+                if (ModelState.IsValid)
+                {
+                    viewModel = _productService.Insert(viewModel);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View(viewModel);
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex.Message);
+                return View(viewModel);
             }
         }
 
